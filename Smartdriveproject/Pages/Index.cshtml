@@ -1,0 +1,37 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Welcome to SmartDrive System</h1>
+    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+</div>
+
+<div>
+    <p>Click to share your current location</p>
+    <p id = "location"><</p>
+    <button onclick = "getlocation()" class = "border-space">Share location</button>
+</div>
+
+<div class = "drop-zone">
+    <span class = "drop-zone_prompt">Drop file here or click to upload</span>
+    <input type="file" name = "dropfile" class="drop-zone_input" />
+</div>
+<script src="/js/dragNdrop.js"></script>
+<script>
+    var x = document.getElementById("location");
+
+    function getlocation(){
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(showPosition);
+        }else{
+            x.innerHTML = "Geolocation not supported"
+        }
+    }
+    function showPosition(position){
+        x.innerHTML = "Latitude" + position.coords.latitude + 
+        "<br>Longitude" + position.coords.longitude;
+    }
+</script>
